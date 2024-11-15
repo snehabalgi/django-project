@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% load custom_filters %} {% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Your Cart</h2>
+
+  {% if cart_items %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Coffee</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>{{ item.coffee.name }}</td>
+        <td>
+          <form method="post" action="{% url 'update_cart' item.id %}">
+            {% csrf_token %}
+            <input
+              type="number"
+              name="quantity"
+              value="{{ item.quantity }}"
+              min="1"
+              class="form-control d-inline-block"
+              style="width: 70px"
+            />
+            <button type="submit" class="btn btn-success btn-sm">Update</button>
+          </form>
+        </td>
+        <td>Rs. {{ item.coffee.price }}</td>
+        <td>Rs. {{ item.coffee.price|multiply:item.quantity }}</td>
+        <td>
+          <a
+            href="{% url 'remove_from_cart' item.id %}"
+            class="btn btn-danger btn-sm"
+            >Remove</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4 class="text-end">Total: Rs. {{ total_price }}</h4>
+  <div class="text-end">
+    <a href="{% url 'clear_cart' %}" class="btn btn-warning">Clear Cart</a>
+  </div>
+  {% else %}
+  <p class="text-center">Your cart is empty.</p>
+  {% endif %}
+</div>
+{% endblock %}

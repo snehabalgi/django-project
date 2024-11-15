@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Coffee Shop Welcome -->
+<h1 class="text-center mb-5">Welcome to Barista</h1>
+
+<div class="row">
+  {% for coffee in coffee %}
+  <div class="col-md-4">
+    <div class="card mb-4" style="width: 18rem">
+      <!-- Link to Coffee Details Page -->
+      <a href="{% url 'coffee_detail' coffee.id %}">
+        <img
+          src="{{ coffee.image.url }}"
+          class="card-img-top"
+          alt="{{ coffee.name }}"
+        />
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">{{ coffee.name }}</h5>
+        <p class="card-text">Rs. {{ coffee.price }}</p>
+
+        <!-- Buttons Section: Aligned in One Row -->
+        <div class="d-flex justify-content-between">
+          <!-- View Details Button -->
+          <a
+            href="{% url 'coffee_detail' coffee.id %}"
+            class="btn btn-outline-secondary"
+          >
+            View Details
+          </a>
+          <!-- Add to Cart Button -->
+          <a href="{% url 'add_to_cart' coffee.id %}" class="btn btn-dark">
+            Add to Cart
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

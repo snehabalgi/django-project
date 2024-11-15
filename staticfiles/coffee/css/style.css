@@ -1,0 +1,31 @@
+/* App-Level: coffee/static/coffee/css/style.css */
+
+/* Coffee Card Styles */
+.card {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-weight: bold;
+  color: #4b2e83;
+}
+
+.card-text {
+  color: #555;
+}
+
+.btn-success {
+  background-color: #00704a; /* Starbucks green */
+  border-color: #00704a;
+}
+
+.btn-success:hover {
+  background-color: #00583a;
+  border-color: #00583a;
+}
